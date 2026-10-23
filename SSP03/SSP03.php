@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 require_once __DIR__ . '/PHP/functions_ss03.php';
 require_once __DIR__ . '/PHP/include_header.php';
+require_once __DIR__ . '/PHP/include_leftNav.php';
+require_once __DIR__ . '/PHP/include_topNav.php';
 
 // Apollo timezone fix
 $tz = new DateTimeZone('America/Chicago');
