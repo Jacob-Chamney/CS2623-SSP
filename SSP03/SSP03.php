@@ -4,6 +4,9 @@
 
 require_once __DIR__ . '/PHP/functions_ss03.php';
 
+date_default_timezone_set('America/Chicago');
+
+// timezone fix
 $tz = new DateTimeZone('America/Chicago');
 $now = new DateTime('now', $tz);
 $current_day = (int)$now->format('N');
