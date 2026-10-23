@@ -1,8 +1,8 @@
 <?php
 
-declare(strict_types=1);
+//declare(strict_types=1); not introduced until PHP 7.0, so we will not use it here.
 
-function fn_tableOpen(string $caption): void
+function fn_tableOpen($caption)
 {
     echo '<table border="1" cellpadding="6" cellspacing="0">';
     echo '<tr style="background-color:#1B2A6B;color:#FFFFFF;">';
@@ -18,12 +18,12 @@ function fn_tableOpen(string $caption): void
     </tr>';
 }
 
-function fn_tableClose(): void
+function fn_tableClose()
 {
     echo '</table>';
 }
 
-function fn_tableRowCurrent(string $day, string $details, string $time): void
+function fn_tableRowCurrent($day, $details, $time)
 {
     echo '<tr style="background-color:#FFFF66;">';
     echo '<td>' . htmlspecialchars($day, ENT_QUOTES, 'UTF-8') . '</td>';
@@ -33,7 +33,7 @@ function fn_tableRowCurrent(string $day, string $details, string $time): void
     echo '</tr>';
 }
 
-function fn_tableRow(string $day, string $details, string $time): void
+function fn_tableRow($day, $details, $time)
 {
     echo '<td>' . htmlspecialchars($day, ENT_QUOTES, 'UTF-8') . '</td>';
     echo '<td>' . htmlspecialchars($details, ENT_QUOTES, 'UTF-8') .
@@ -42,7 +42,7 @@ function fn_tableRow(string $day, string $details, string $time): void
     echo '</tr>';
 }
 
-function fn_dayOfWeek(int $day_num): string
+function fn_dayOfWeek($day_num)
 {
     if ($day_num === 1) {
         return 'Monday';
@@ -61,41 +61,41 @@ function fn_dayOfWeek(int $day_num): string
     } else {
         return '';
     }
+}
 
-    function fn_dayDetails(int $day_num): string
-    {
-        switch ($day_num) {
-            case 1:
-                return 'Slack off + poweroint presentations';
-            case 2:
-                return 'SSP03 homework + poweroint presentations';
-            case 3:
-                return 'SSP03 homework';
-            case 4:
-                return 'SSP04 homework';
-            case 5:
-                return 'SSP04 homework';
-            case 6:
-                return 'Week 2 quizes';
-            case 7:
-                return 'Rest day';
-            default:
-                return 'No schedule';
-        }
+function fn_dayDetails($day_num)
+{
+    switch ($day_num) {
+        case 1:
+            return 'Slack off + poweroint presentations';
+        case 2:
+            return 'SSP03 homework + poweroint presentations';
+        case 3:
+            return 'SSP03 homework';
+        case 4:
+            return 'SSP04 homework';
+        case 5:
+            return 'SSP04 homework';
+        case 6:
+            return 'Week 2 quizes';
+        case 7:
+            return 'Rest day';
+        default:
+            return 'No schedule';
     }
+}
 
-    function fn_dayTime(int $day_num): string
-    {
-        if ($day_num === 1 || $day_num === 3) {
-            return '9:00 AM - 10:20 AM';
-        } elseif ($day_num === 2 || $day_num === 4) {
-            return '1:00 PM - 2:50 PM';
-        } elseif ($day_num === 5) {
-            return '10:00 AM - 11:00 AM';
-        } elseif ($day_num === 6 || $day_num === 7) {
-            return 'Flexible';
-        } else {
-            return 'TBD';
-        }
+function fn_dayTime($day_num)
+{
+    if ($day_num === 1 || $day_num === 3) {
+        return '9:00 AM - 10:20 AM';
+    } elseif ($day_num === 2 || $day_num === 4) {
+        return '1:00 PM - 2:50 PM';
+    } elseif ($day_num === 5) {
+        return '10:00 AM - 11:00 AM';
+    } elseif ($day_num === 6 || $day_num === 7) {
+        return 'Flexible';
+    } else {
+        return 'TBD';
     }
 }

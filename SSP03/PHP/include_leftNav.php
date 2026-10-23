@@ -6,8 +6,8 @@
 <nav id="left-nav">
   <ul>
     <li><a href="../SSP01/index.php">Home (SSP01)</a></li>
-        <li><a href="SSP02.php">SSP02</a></li>
-        <li><a href="SSP03.php">SSP03</a></li>
+        <li><a href="../SSP02/SSP02.php">SSP02</a></li>
+        <li><a href="../SSP03/SSP03.php">SSP03</a></li>
     <!-- add more as the semester progresses -->
   </ul>
 </nav>

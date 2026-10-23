@@ -108,3 +108,7 @@ nav a:active {
   flex: 1;
   min-width: 0;
 }
+
+#table-wrapper table {
+  margin: 0 auto;
+}
