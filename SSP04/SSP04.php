@@ -9,7 +9,9 @@ $originalString = "Hello, World!";
 $modifiedString = str_replace("World", "PHP", $originalString);
 
 // string contains check
-$containsCheck = str_contains($originalString, "Hello");
+// str_contains() is available in PHP 8.0 and later.
+// for compatibility with earlier versions, we can use strpos() instead.
+$containsCheck = strpos($originalString, "Hello") !== false;
 $containsBool = $containsCheck ? "Yes" : "No";
 
 // string to lowercase
