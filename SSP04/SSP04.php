@@ -51,7 +51,7 @@ $stringFunctions = [
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>PHP String Functions</title>
+    <title>CS2623 SSP04: Chamney</title>
     <link rel="stylesheet" href="CSS/main.css">
     <link rel="stylesheet" href="CSS/table.css">
 </head>
@@ -67,9 +67,9 @@ $stringFunctions = [
     <h2>Original String</h2>
     <p><?php e($originalString); ?></p>
 
-                    <h2>Function Demonstrations</h2>
                     </div>
     <table class="data-table">
+                    <caption>Function Demonstrations</caption>
         <thead>
             <tr>
                 <th>Function</th>
