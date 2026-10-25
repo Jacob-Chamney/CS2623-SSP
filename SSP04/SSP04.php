@@ -60,13 +60,15 @@ $stringFunctions = [
     <div id="page-wrapper">
         <?php require_once __DIR__ . "/PHP/include_leftNav.php"; ?>
         <main>
-            <?php require_once __DIR__ . "/PHP/include_topNav.php"; ?>
+                <?php require_once __DIR__ . "/PHP/include_topNav.php"; ?>
+                <div class="center-text">
     <h1>PHP String Functions</h1>
 
     <h2>Original String</h2>
     <p><?php e($originalString); ?></p>
 
-    <h2>Function Demonstrations</h2>
+                    <h2>Function Demonstrations</h2>
+                    </div>
     <table class="data-table">
         <thead>
             <tr>

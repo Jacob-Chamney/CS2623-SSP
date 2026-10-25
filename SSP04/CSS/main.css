@@ -113,3 +113,7 @@ nav a:active {
 #table-wrapper>table {
   margin: 0 auto;
 }
+
+.center-text {
+  text-align: center;
+}
