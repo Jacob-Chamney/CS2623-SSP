@@ -1,0 +1,115 @@
+/* ============================================================
+   CS2623 SSP03 — main.css
+   Author: Chamney, Jacob
+   ============================================================
+   COLORS
+   Background:         #F5F5F5 (light gray)
+   Header:             #1B2A6B (navy)
+   Header text:        #FFFFFF (white)
+   Text:               #222222 (near-black)
+   Nav buttons:        #006B7D (teal)
+   Nav link text:      #FFFFFF (white, unvisited and visited)
+   Active nav buttons: #CC0000 (red)
+   Footer:             #E0E0E0 (light gray)
+   ============================================================
+   TYPOGRAPHY
+   Body:    1em Calibri, Tahoma, Verdana, Arial
+   Headers: 2.2em "Times New Roman", Georgia, serif
+   Nav:     0.85em Tahoma, Verdana, Arial
+   Footer:  0.85em Tahoma, Verdana, Arial
+   ============================================================ */
+
+
+/* main */
+
+header {
+  background-color: #1B2A6B;
+  color: #FFFFFF;
+  padding: 1em;
+  text-align: center;
+}
+
+h1 {
+  font-size: 2.2em;
+  font-family: "Times New Roman", Georgia, serif;
+  margin: 0.5em 0;
+}
+
+nav {
+  background-color: #F5F5F5;
+  padding: 0.5em;
+  text-align: center;
+}
+
+nav a {
+  display: inline-block;
+  background-color: #006B7D;
+  padding: 0.5em 0.8em;
+  margin: 0.25em;
+  border-radius: 10px;
+  text-decoration: none;
+  font-size: 0.85em;
+  font-family: Tahoma, Verdana, Arial, sans-serif;
+}
+
+body {
+  background-color: #F5F5F5;
+  color: #222222;
+  font-family: Calibri, Tahoma, Verdana, Arial, sans-serif;
+  font-size: 1em;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+}
+
+footer {
+  background-color: #E0E0E0;
+  color: #222222;
+  text-align: center;
+  padding: 1em;
+  font-size: 0.85em;
+  font-family: Tahoma, Verdana, Arial, sans-serif;
+}
+
+/* nav link states and formatting */
+
+nav a:link,
+nav a:visited {
+  color: #FFFFFF;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+nav a:active {
+  background-color: #CC0000;
+  color: #FFFFFF;
+}
+
+#left-nav ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+/* Additional styling for left navigation links */
+
+#page-wrapper {
+  display: flex;
+  align-items: flex-start;
+}
+
+#left-nav {
+  flex: 0 0 10em;
+  text-align: left;
+}
+
+#page-wrapper>main {
+  flex: 1;
+  min-width: 0;
+  padding-right: 10em;
+}
+
+#table-wrapper>table {
+  margin: 0 auto;
+}
