@@ -74,11 +74,11 @@ $stringFunctions = [
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($stringFunctions as [$fn, $in, $out]) : ?>
+            <?php foreach ($stringFunctions as $row) : ?>
             <tr>
-                <td><code><?php e($fn); ?></code></td>
-                <td><?php e($in); ?></td>
-                <td><?php e($out); ?></td>
+                <td><code><?php e($row[0]); ?></code></td>
+                <td><?php e($row[1]); ?></td>
+                <td><?php e($row[2]); ?></td>
             </tr>
             <?php endforeach; ?>
         </tbody>
