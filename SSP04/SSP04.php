@@ -67,7 +67,7 @@ $stringFunctions = [
     <p><?php e($originalString); ?></p>
 
     <h2>Function Demonstrations</h2>
-    <table>
+    <table class="data-table">
         <thead>
             <tr>
                 <th>Function</th>
