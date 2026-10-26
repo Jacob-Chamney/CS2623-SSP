@@ -106,3 +106,13 @@ function e($string)
 {
     echo htmlspecialchars($string, ENT_QUOTES, 'UTF-8');
 }
+
+
+// Helper to format intervals nicely for display
+function formatInterval($interval)
+{
+    $days = $interval->days;
+    $hours = $interval->h;
+    $minutes = $interval->i;
+    return "{$days} days, {$hours} hours, {$minutes} minutes";
+}

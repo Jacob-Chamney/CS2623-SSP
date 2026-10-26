@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . "/PHP/functions_ss03.php";
+require_once dirname(__DIR__) . "/PHP/functions.php";
 
 // original string
 $originalString = "Hello, World!";
@@ -52,43 +52,41 @@ $stringFunctions = [
 <head>
     <meta charset="UTF-8">
     <title>CS2623 SSP04: Chamney</title>
-    <link rel="stylesheet" href="CSS/main.css">
-    <link rel="stylesheet" href="CSS/table.css">
+    <link rel="stylesheet" href="../CSS/main.css">
+    <link rel="stylesheet" href="../CSS/table.css">
 </head>
     <body>
-    <?php require_once __DIR__ . "/PHP/include_header.php"; ?>
-    <div id="page-wrapper">
-        <?php require_once __DIR__ . "/PHP/include_leftNav.php"; ?>
-        <main>
-                <?php require_once __DIR__ . "/PHP/include_topNav.php"; ?>
+        <?php require_once dirname(__DIR__) . "/PHP/include_header.php"; ?>
+        <div id="page-wrapper">
+            <?php require_once dirname(__DIR__) . "/PHP/include_leftNav.php"; ?>
+            <main>
+                <?php require_once dirname(__DIR__) . "/PHP/include_topNav.php"; ?>
                 <div class="center-text">
-    <h1>PHP String Functions</h1>
-
-    <h2>Original String</h2>
-    <p><?php e($originalString); ?></p>
-
-                    </div>
-    <table class="data-table">
+                    <h1>PHP String Functions</h1>
+                    <h2>Original String</h2>
+                    <p><?php e($originalString); ?></p>
+                </div>
+                <table class="data-table">
                     <caption>Function Demonstrations</caption>
-        <thead>
-            <tr>
-                <th>Function</th>
-                <th>Input</th>
-                <th>Output</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($stringFunctions as $row) : ?>
-            <tr>
-                <td><code><?php e($row[0]); ?></code></td>
-                <td><?php e($row[1]); ?></td>
-                <td><?php e($row[2]); ?></td>
-            </tr>
-            <?php endforeach; ?>
-        </tbody>
+                    <thead>
+                        <tr>
+                            <th>Function</th>
+                            <th>Input</th>
+                            <th>Output</th>
+                        </tr>
+                    </thead>
+                        <tbody>
+                        <?php foreach ($stringFunctions as $row) : ?>
+                            <tr>
+                                <td><code><?php e($row[0]); ?></code></td>
+                                <td><?php e($row[1]); ?></td>
+                                <td><?php e($row[2]); ?></td>
+                            </tr>
+                        <?php endforeach; ?>
+                        </tbody>
                 </table>
             </main>
         </div>
-    <?php require_once __DIR__ . "/PHP/include_footer.php"; ?>
+    <?php require_once dirname(__DIR__) . "/PHP/include_footer.php"; ?>
 </body>
 </html>

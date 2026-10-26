@@ -8,7 +8,7 @@
   <meta name="description" content="CS2623 Server-Side Programming — SSP01">
   <meta name="keywords" content="PHP, server-side, CS2623, OCCC">
   <title>CS2623 SSP01: Chamney</title>
-  <link rel="stylesheet" href="main.css">
+  <link rel="stylesheet" href="../CSS/main.css">
 </head>
 
 <body>
@@ -20,7 +20,7 @@
     <a href="../SSP01/index.php">Home</a>
     <a href="../SSP02/SSP02.php">SSP02</a>
     <a href="../SSP03/SSP03.php">SSP03</a>
-    <a href="../SSP04/SSP04.php">SSP04</a>
+    <a href="../SSP04/ex1.php">SSP04</a>
     <a href="../SSP05/SSP05.php">SSP05</a>
     <a href="../SSP06/SSP06.php">SSP06</a>
     <a href="../SSP07/SSP07.php">SSP07</a>
