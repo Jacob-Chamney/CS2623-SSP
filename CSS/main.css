@@ -111,6 +111,10 @@ nav a:active {
   margin: 0 auto;
 }
 
+#page-wrapper>main.with-left-nav {
+  padding-right: 10em;
+}
+
 #table-wrapper>table {
   margin: 0 auto;
 }

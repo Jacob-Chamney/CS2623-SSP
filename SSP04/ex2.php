@@ -38,7 +38,7 @@ $days_left = $interval->days;
     <?php require_once dirname(__DIR__) . "/PHP/include_header.php"; ?>
     <div id="page-wrapper">
         <?php require_once dirname(__DIR__) . "/PHP/include_leftNav.php"; ?>
-        <main>
+        <main class="with-left-nav">
             <?php require_once dirname(__DIR__) . "/PHP/include_topNav.php"; ?>            
             <div class="center-text">
                 <h1>Date & Time Demonstrations</h1>
