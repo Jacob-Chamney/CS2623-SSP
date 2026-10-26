@@ -107,7 +107,8 @@ nav a:active {
 #page-wrapper>main {
   flex: 1;
   min-width: 0;
-  padding-right: 10em;
+  padding: 0;
+  margin: 0 auto;
 }
 
 #table-wrapper>table {
