@@ -7,41 +7,82 @@
   - [Accepted](#accepted)
   - [Rejected](#rejected)
   - [Improved](#improved)
+  - [Additional Notes](#additional-notes)
 
 <!--toc:end-->
 
 ## Overall Experience
 
-- Throughout the assignment I followed the instructions as closely as possible,
-  often finding sections a bit confusing. Such as the `main.css` file, which was
-  presented as a comment block with a note stating that Copilot will suggest CSS
-  rules. Using this note I was able to get Copilot to suggest some CSS rules but
-  often the suggestions were not what was desired. I found that simply making an
-  inline note and going to the next line gave Copilot a much better chance of
-  suggesting what was desired.
+- The assignments were straightforward, but deploying them introduced a steep
+  learning curve. Copilot was helpful for generating code snippets, but I had to
+  carefully vet its suggestions to ensure they aligned with the specific
+  requirements and the legacy server environment.
+
+- I refactored my entire codebase to make maintenance easier and to clean up the
+  structure. By moving HTML and CSS to root folders (`/CSS/` and `/PHP/`), I
+  consolidated shared assets, which makes navigation and global styling much
+  easier to manage. However, this required me to learn how to properly route
+  absolute paths (`dirname(__DIR__)`.
 
 ## Accepted
 
-- Using the technique above I accepted many CSS suggestions from Copilot, such
-  as rounded corners, colors, font sizes, and alignment. These turned out to be
-  stylistic choices that were not required but that i liked and wanted to keep.
+- I accepted many changes from Copilot, such as:
 
-- I also accepted much of the boilerplate code from the simple `<!DOCTYPE html>`
-  tag. This made it much easier to get through the assignment without having to
-  worry about the basic structure of the HTML file.
+  - HTML and CSS refactoring, including name changes that made the code more
+    readable and maintainable.
+
+  - Variable name recommendations. Copilot generally suggested boilerplate that
+    sped up the process of writing standard code.
+
+  - Standard structural patterns for the DateTime API, such as initializing the
+    timezone and using `diff()` to calculate intervals.
 
 ## Rejected
 
-- Copilot suggested a match statement instead of a if/else chain. The assignment
-  calls for the if/else chain control structure, so I rejected the match
-  statement suggestion.
+- Copilot rejections:
+
+  - Copilot suggested a `match` statement instead of an `if/else` chain. Since
+    the assignment specifically called for conditional logic and I needed to
+    maintain compatibility, I rejected the `match` suggestion.
+
+  - Copilot frequently suggested newer PHP features that are completely
+    incompatible with the Apollo server (which runs PHP 5.5). I rejected
+    `declare(strict_types=1);`, `str_contains()`, and array destructuring in
+    `foreach` loops (e.g., `as [$a, $b]`), opting instead for
+    `strpos() !== false` and standard index access to ensure the code wouldn't
+    crash.
 
 ## Improved
 
-- I ended up accepting many CSS changes from Copilot, but I also made many
-  changes to those suggestions. Sometimes it was almost what I wanted but
-  contained some extra styling that was not necessary.
-
-- I also improved many suggestions that were correct but didn't make use of the
+- A major improvement is that Copilot usually doesn't suggest the
   `htmlspecialchars()` function to escape HTML characters and help prevent
-  **XSS**.
+  **XSS**. I had to manually add a helper function to the codebase to ensure
+  that the code is secure and follows best practices.
+
+```php
+function e($string)
+{
+    echo htmlspecialchars($string, ENT_QUOTES, 'UTF-8');
+}
+```
+
+- By using this function, I can ensure that any user input is properly escaped,
+  and Copilot now even suggests it automatically when I type `e(`. This is a
+  great security improvement!
+
+- I also improved the CSS architecture. I refactored the table styles from
+  hardcoded IDs (`#weekly-planner`) to reusable classes (`.data-table`). This
+  allowed me to apply the same clean, centered layout to the new string
+  functions table without duplicating code.
+
+## Additional Notes
+
+- I am using LazyVim with the `copilot.vim` plugin. I have found that
+  `copilot.vim` is a great tool for improving my coding skills and productivity,
+  providing suggestions that help me write code faster and more efficiently.
+  However, I don't have the chat feature set up yet, so I can't ask it to write
+  a `.gitignore` file for me.
+
+- Deployment required extra troubleshooting. Because of aggressive browser
+  caching on the Apollo server, I had to learn how to force hard refreshes
+  (`Ctrl + F5`).
