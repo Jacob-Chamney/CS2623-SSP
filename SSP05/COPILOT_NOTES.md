@@ -1,5 +1,48 @@
 # CS2623 Week 3 Copilot Notes
 
+<!--toc:start-->
+
+- [CS2623 Week 3 Copilot Notes](#cs2623-week-3-copilot-notes)
+  - [Overall Experience](#overall-experience)
+  - [Accepted](#accepted)
+  - [Rejected](#rejected)
+  - [Improved](#improved)
+  - [SSP05_1](#ssp05_1)
+
+<!--toc:end-->
+
+## Overall Experience
+
+## Accepted
+
+- For `SSP05_ex1.php` I accepted the standard `filter_input()` skeleton for the
+  seven fields, including the `FILTER_VALIDATE_EMAIL` and `FILTER_VALIDATE_INT`
+  arguments.
+
+- I also accepted the page structure Copilot filled in around the form, so the
+  exercise matches the header, nav and footer used by the rest of the site.
+
+## Rejected
+
+- Copilot used `$_POST['first_name']` directly instead of `filter_input()`. I
+  rejected it because the assignment requires `filter_input()`, and it also
+  returns null for a missing field instead of an undefined index warning.
+
+- Copilot added `declare(strict_types=1);` at the top of the file. I rejected it
+  because the server runs PHP 5.5, where it only produces an unsupported declare
+  warning, so it is commented out with a note instead.
+
+## Improved
+
+- Copilot wrote the defaults with `??`, which is PHP 7.0 and later. I improved
+  those lines to `is_null()` checks so the page runs on the PHP 5.5 server (not
+  really an improve but a fix).
+
+- Copilot left the echoed values unescaped. I improved every output to go
+  through the `e()` helper so submitted text cannot inject HTML.
+
+## SSP05_1
+
 - `filter_input()` vs `$_POST`, as answered by Copilot Chat:
 
   > The difference between `filter_input` and `$_POST` in PHP lies in how they
