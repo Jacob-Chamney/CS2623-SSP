@@ -122,3 +122,61 @@ nav a:active {
 .center-text {
   text-align: center;
 }
+
+.center-text ul {
+  list-style-position: inside;
+  padding-left: 0;
+}
+
+/* forms */
+
+form {
+  max-width: 34em;
+  margin: 1.5em auto;
+}
+
+form label {
+  display: block;
+  margin-top: 0.6em;
+  font-weight: bold;
+}
+
+form input[type="text"],
+form input[type="email"],
+form input[type="number"],
+form select,
+form textarea {
+  width: 100%;
+  padding: 0.4em;
+  border: 1px solid #CCCCCC;
+  box-sizing: border-box;
+  font-family: inherit;
+  font-size: 1em;
+}
+
+/* radio labels sit inline beside their button */
+
+form input[type="radio"]+label {
+  display: inline;
+  margin-top: 0;
+  margin-right: 1em;
+  font-weight: normal;
+}
+
+form input[type="submit"] {
+  display: block;
+  margin-top: 1em;
+  margin-left: auto;
+  background-color: #006B7D;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 10px;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+form input[type="submit"]:hover {
+  text-decoration: underline;
+}
