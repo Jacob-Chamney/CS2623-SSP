@@ -1,13 +1,16 @@
 /* ============================================================
- CS2623 SSP02 — table.css
+ CS2623 table.css (SSP02 to SSP05)
  Author: Chamney, Jacob
  COLORS
  Table header: #1B2A6B (navy)
- Header text: #FFFFFF (white)
- Even rows: #E8EEF4 (light blue)
- Odd rows: #FFFFFF (white)
- Caption: #006B7D (teal)
+ Header text:  #FFFFFF (white)
+ Even rows:    #E8EEF4 (light blue)
+ Odd rows:     #FFFFFF (white)
+ Caption:      #006B7D (teal)
+ Borders:      #CCCCCC (light gray)
  ============================================================ */
+
+/* shared table */
 
 .data-table {
   width: 80%;
@@ -16,12 +19,16 @@
   font-family: Calibri, Tahoma, Arial, sans-serif;
 }
 
+/* table caption */
+
 .data-table caption {
   font-size: 1.1em;
   font-weight: bold;
   color: #006B7D;
   margin-bottom: 0.5em;
 }
+
+/* header row */
 
 .data-table th {
   background-color: #1B2A6B;
@@ -30,14 +37,20 @@
   text-align: left;
 }
 
+/* cell borders */
+
 .data-table td {
   padding: 0.5em 1em;
   border: 1px solid #CCCCCC;
 }
 
+/* zebra rows */
+
 .data-table tr:nth-child(even) td {
   background-color: #E8EEF4;
 }
+
+/* same rules for the SSP02 planner ID */
 
 #weekly-planner {
   width: 80%;

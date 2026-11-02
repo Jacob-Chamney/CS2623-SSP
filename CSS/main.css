@@ -1,15 +1,16 @@
 /* ============================================================
-   CS2623 SSP03 — main.css
+   CS2623 main.css (SSP01 to SSP05)
    Author: Chamney, Jacob
    ============================================================
    COLORS
    Background:         #F5F5F5 (light gray)
    Header:             #1B2A6B (navy)
    Header text:        #FFFFFF (white)
-   Text:               #222222 (near-black)
-   Nav buttons:        #006B7D (teal)
-   Nav link text:      #FFFFFF (white, unvisited and visited)
+   Text:               #222222 (near black)
+   Buttons:            #006B7D (teal, nav and forms)
+   Button text:        #FFFFFF (white, unvisited and visited)
    Active nav buttons: #CC0000 (red)
+   Field borders:      #CCCCCC (light gray)
    Footer:             #E0E0E0 (light gray)
    ============================================================
    TYPOGRAPHY
@@ -17,10 +18,13 @@
    Headers: 2.2em "Times New Roman", Georgia, serif
    Nav:     0.85em Tahoma, Verdana, Arial
    Footer:  0.85em Tahoma, Verdana, Arial
+   Forms:   inherit the body font size and family
    ============================================================ */
 
 
 /* main */
+
+/* site banner */
 
 header {
   background-color: #1B2A6B;
@@ -29,17 +33,23 @@ header {
   text-align: center;
 }
 
+/* page heading */
+
 h1 {
   font-size: 2.2em;
   font-family: "Times New Roman", Georgia, serif;
   margin: 0.5em 0;
 }
 
+/* nav bar */
+
 nav {
   background-color: #F5F5F5;
   padding: 0.5em;
   text-align: center;
 }
+
+/* nav buttons */
 
 nav a {
   display: inline-block;
@@ -52,6 +62,8 @@ nav a {
   font-family: Tahoma, Verdana, Arial, sans-serif;
 }
 
+/* body text */
+
 body {
   background-color: #F5F5F5;
   color: #222222;
@@ -62,6 +74,8 @@ body {
   padding: 0;
 }
 
+/* footer */
+
 footer {
   background-color: #E0E0E0;
   color: #222222;
@@ -71,38 +85,52 @@ footer {
   font-family: Tahoma, Verdana, Arial, sans-serif;
 }
 
-/* nav link states and formatting */
+/* link states */
+
+/* visited links stay white */
 
 nav a:link,
 nav a:visited {
   color: #FFFFFF;
 }
 
+/* hover feedback */
+
 nav a:hover {
   text-decoration: underline;
 }
+
+/* click feedback */
 
 nav a:active {
   background-color: #CC0000;
   color: #FFFFFF;
 }
 
+/* left nav list */
+
 #left-nav ul {
   list-style-type: none;
   padding-left: 0;
 }
 
-/* Additional styling for left navigation links */
+/* page layout */
+
+/* nav beside content */
 
 #page-wrapper {
   display: flex;
   align-items: flex-start;
 }
 
+/* fixed nav width */
+
 #left-nav {
   flex: 0 0 10em;
   text-align: left;
 }
+
+/* content fills the rest */
 
 #page-wrapper>main {
   flex: 1;
@@ -111,17 +139,25 @@ nav a:active {
   margin: 0 auto;
 }
 
+/* balanced with the nav column */
+
 #page-wrapper>main.with-left-nav {
   padding-right: 10em;
 }
+
+/* centered tables */
 
 #table-wrapper>table {
   margin: 0 auto;
 }
 
+/* centered text */
+
 .center-text {
   text-align: center;
 }
+
+/* bullets stay inside the block */
 
 .center-text ul {
   list-style-position: inside;
@@ -130,16 +166,22 @@ nav a:active {
 
 /* forms */
 
+/* form width */
+
 form {
   max-width: 34em;
   margin: 1.5em auto;
 }
+
+/* labels above fields */
 
 form label {
   display: block;
   margin-top: 0.6em;
   font-weight: bold;
 }
+
+/* field sizing */
 
 form input[type="text"],
 form input[type="email"],
@@ -154,7 +196,13 @@ form textarea {
   font-size: 1em;
 }
 
-/* radio labels sit inline beside their button */
+/* fixed textarea size */
+
+form textarea {
+  resize: none;
+}
+
+/* inline radio labels */
 
 form input[type="radio"]+label {
   display: inline;
@@ -162,6 +210,8 @@ form input[type="radio"]+label {
   margin-right: 1em;
   font-weight: normal;
 }
+
+/* right aligned button */
 
 form input[type="submit"] {
   display: block;
@@ -176,6 +226,8 @@ form input[type="submit"] {
   font-family: inherit;
   cursor: pointer;
 }
+
+/* button hover */
 
 form input[type="submit"]:hover {
   text-decoration: underline;
