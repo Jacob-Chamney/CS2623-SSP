@@ -8,6 +8,7 @@
   - [Rejected](#rejected)
   - [Improved](#improved)
   - [SSP05_1](#ssp05_1)
+  - [SSP05_2](#ssp05_2)
 
 <!--toc:end-->
 
@@ -22,6 +23,14 @@
 - I also accepted the page structure Copilot filled in around the form, so the
   exercise matches the header, nav and footer used by the rest of the site.
 
+- Copilot generated the whole six field form for `SSP05_ex2.php` from the
+  comment listing the fields, including the product select with prices and the
+  three `options[]` checkboxes.
+
+- I accepted Copilot's suggestion to escape every value before it goes into the
+  results block, which in this project means the `e()` helper that wraps
+  `htmlspecialchars($val, ENT_QUOTES, 'UTF-8')`.
+
 ## Rejected
 
 - Copilot used `$_POST['first_name']` directly instead of `filter_input()`. I
@@ -32,6 +41,14 @@
   because the server runs PHP 5.5, where it only produces an unsupported declare
   warning, so it is commented out with a note instead.
 
+- Copilot wrote `isset($_POST['gift_wrap'])` once per checkbox in
+  `SSP05_ex2.php`. I rejected that because the assignment needs the array with
+  `FILTER_REQUIRE_ARRAY`, and the per box version has to be edited every time an
+  option is added.
+
+- Copilot used `FILTER_SANITIZE_STRING` in its example. I rejected it because it
+  is deprecated since PHP 8.1, and it strips input instead of validating it.
+
 ## Improved
 
 - Copilot wrote the defaults with `??`, which is PHP 7.0 and later. I improved
@@ -40,6 +57,14 @@
 
 - Copilot left the echoed values unescaped. I improved every output to go
   through the `e()` helper so submitted text cannot inject HTML.
+
+- While debugging `SSP05_ex2.php` I used `print_r($_POST, true)` inside `<pre>`
+  instead of Copilot's `var_dump($_POST)`, so the submitted fields were readable.
+  That line was removed before finishing.
+
+- Copilot put `nl2br()` straight on the instructions value. I improved it to
+  `htmlspecialchars()` first, or the `<br>` tags it adds get escaped along with
+  the user's text.
 
 ## SSP05_1
 
@@ -63,3 +88,15 @@
   > In summary, `$_POST` is direct access without filtering, while
   > `filter_input` is the more secure, flexible way to retrieve and validate
   > input.
+
+## SSP05_2
+
+- I wrote comments to steer Copilot. One says the checkbox array needs
+  `FILTER_REQUIRE_ARRAY`, and a `why does the above line work?` question sits
+  under the filter call, which Copilot answered inline as comments. The filter
+  call and the `is_null()` checks that replaced `?? []` came out of those
+  prompts.
+
+- Copilot used `FILTER_DEFAULT` in that call. It is deprecated in PHP 8.5 and is
+  only an alias of `FILTER_UNSAFE_RAW`, so I changed the comment to say
+  `FILTER_UNSAFE_RAW` instead.
