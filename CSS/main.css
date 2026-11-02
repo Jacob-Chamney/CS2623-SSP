@@ -202,9 +202,10 @@ form textarea {
   resize: none;
 }
 
-/* inline radio labels */
+/* inline radio and checkbox labels */
 
-form input[type="radio"]+label {
+form input[type="radio"]+label,
+form input[type="checkbox"]+label {
   display: inline;
   margin-top: 0;
   margin-right: 1em;
