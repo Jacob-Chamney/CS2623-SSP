@@ -59,8 +59,8 @@
   through the `e()` helper so submitted text cannot inject HTML.
 
 - While debugging `SSP05_ex2.php` I used `print_r($_POST, true)` inside `<pre>`
-  instead of Copilot's `var_dump($_POST)`, so the submitted fields were readable.
-  That line was removed before finishing.
+  instead of Copilot's `var_dump($_POST)`, so the submitted fields were
+  readable. That line was removed before finishing.
 
 - Copilot put `nl2br()` straight on the instructions value. I improved it to
   `htmlspecialchars()` first, or the `<br>` tags it adds get escaped along with
