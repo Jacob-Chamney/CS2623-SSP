@@ -59,6 +59,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <body>
         <?php require_once dirname(dirname(__DIR__)) . "/PHP/include_header.php"; ?>
         <div id="page-wrapper">
+            <nav id="left-nav">
+                <ul>
+                    <li><a href="../SSP07_11_1/index.php">Array operations</a></li>
+                    <li>
+                        <a href="../SSP07_15_1/index.php">Regex and exception handling</a>
+                    </li>
+                </ul>
+            </nav>
             <main class="center-text">
                 <?php require_once dirname(dirname(__DIR__)) . "/PHP/include_topNav.php"; ?>
                 <h1>Contact Form Validation</h1>
@@ -93,4 +101,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     </label><br>
                     <button type="submit">Validate</button>
                 </form>
-    </body></html>
+            </main>
+        </div>
+        <?php require_once dirname(dirname(__DIR__)) . "/PHP/include_footer.php"; ?>
+    </body>
+</html>

@@ -55,6 +55,14 @@ $catalog = [
     <body>
         <?php require_once dirname(dirname(__DIR__)) . "/PHP/include_header.php"; ?>
         <div id="page-wrapper">
+            <nav id="left-nav">
+                <ul>
+                    <li><a href="../SSP07_11_1/index.php">Array operations</a></li>
+                    <li>
+                        <a href="../SSP07_15_1/index.php">Regex and exception handling</a>
+                    </li>
+                </ul>
+            </nav>
             <main class="center-text">
                 <?php require_once dirname(dirname(__DIR__)) . "/PHP/include_topNav.php"; ?>
                 <h1>Fruit Array Demo</h1>
