@@ -2,11 +2,15 @@
 
 declare(strict_types=1);
 
+use CS2623\Week4\FormatException;
 use CS2623\Week4\ValidationException;
 
 require_once dirname(dirname(__DIR__)) . "/PHP/functions.php";
 require_once __DIR__ . "/DatabaseException.php";
 require_once __DIR__ . "/ValidationException.php";
+require_once __DIR__ . "/FormatException.php";
+
+$navBase = '../../';
 
 $result = null;
 $errMsg = null;
@@ -19,18 +23,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             ?? '',
         'zip' => filter_input(INPUT_POST, 'zip', FILTER_SANITIZE_SPECIAL_CHARS)
             ?? '',
-        'notes' => filter_input(INPUT_POST, 'notes', FILTER_SANITIZE_SPECIAL_CHARS)
+        'website' => filter_input(INPUT_POST, 'website', FILTER_SANITIZE_URL)
+            ?? '',
+        'age' => filter_input(INPUT_POST, 'age', FILTER_SANITIZE_SPECIAL_CHARS)
+            ?? '',
+        'product_code' => filter_input(INPUT_POST, 'product_code', FILTER_SANITIZE_SPECIAL_CHARS)
+            ?? '',
+        'message' => filter_input(INPUT_POST, 'message', FILTER_UNSAFE_RAW)
             ?? '',
     ];
     try {
         $result = validateContact($raw);
-    } catch (ValidationException $e) { // specific first
+    } catch (FormatException $e) {
         $errMsg = $e->getMessage();
-    } catch (RuntimeException $e) { // broader next
+    } catch (ValidationException $e) {
+        $errMsg = $e->getMessage();
+    } catch (RuntimeException $e) {
         $errMsg = 'System error: ' . $e->getMessage();
     } finally {
         // runs regardless — good for logging
-        error_log('Contact form processed at ' . date('Y-m-d H:i:s'));
+        $now = new DateTime('now', new DateTimeZone('America/Chicago'));
+        error_log('Contact form processed at ' . $now->format('Y-m-d H:i:s'));
     }
 }
 ?>
@@ -47,20 +60,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <?php if ($result) : ?>
         <p>✓ All fields valid — ready to save.</p>
         <ul>
-            <li>Email: <?= htmlspecialchars($result['email'], ENT_QUOTES, 'UTF-8')
-            ?></li>
-            <li>Phone: <?= htmlspecialchars($result['phone'], ENT_QUOTES, 'UTF-8')
-            ?></li>
-            <li>ZIP: <?= htmlspecialchars($result['zip'], ENT_QUOTES, 'UTF-8')
-            ?></li>
+            <li>Email: <?= htmlspecialchars($result['email'], ENT_QUOTES, 'UTF-8') ?></li>
+            <li>Phone: <?= htmlspecialchars($result['phone'], ENT_QUOTES, 'UTF-8') ?></li>
+            <li>ZIP: <?= htmlspecialchars($result['zip'], ENT_QUOTES, 'UTF-8') ?></li>
+            <li>Website: <?= htmlspecialchars($result['website'], ENT_QUOTES, 'UTF-8') ?></li>
+            <li>Age: <?= (int) $result['age'] ?></li>
+            <li>Product Code: <?= htmlspecialchars($result['product_code'], ENT_QUOTES, 'UTF-8') ?></li>
         </ul>
+        <p><strong>Message:</strong><br>
+            <?= nl2br(htmlspecialchars($result['message'], ENT_QUOTES, 'UTF-8')) ?>
+        </p>        
         <?php endif; ?>
         <form method="post">
             <label>Email: <input type="text" name="email"></label><br>
             <label>Phone (555-555-5555): <input type="text" name="phone"></label><br>
             <label>ZIP: <input type="text" name="zip"></label><br>
-            <label>Notes:<br>
-                <textarea name="notes" rows="4" cols="40"></textarea>
+            <label>Website: <input type="text" name="website"></label><br>
+            <label>Age (1-120): <input type="number" name="age" min="1" max="120"></label><br>
+            <label>Product Code (AB1234): <input type="text" name="product_code"></label><br>
+            <label>Message:<br>
+                <textarea name="message" rows="4" cols="40"></textarea>
             </label><br>
             <button type="submit">Validate</button>
         </form>

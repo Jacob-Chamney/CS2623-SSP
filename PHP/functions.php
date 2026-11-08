@@ -2,6 +2,7 @@
 
 //declare(strict_types=1); not introduced until PHP 7.0, so we will not use it here.
 
+use CS2623\Week4\FormatException;
 use CS2623\Week4\ValidationException;
 
 function fn_tableOpen($caption)
@@ -123,22 +124,50 @@ function formatInterval($interval)
 function validateContact(array $data): array
 {
     $errors = [];
-    // Email — use filter_var, NOT a custom regex
-    if (!filter_var($data['email'] ?? '', FILTER_VALIDATE_EMAIL)) {
-        $errors[] = 'Invalid email address.';
-    }
-    // Phone — filter_var has no phone validator; use preg_match
-    $phone = $data['phone'] ?? '';
-    if (!preg_match('/^\d{3}-\d{3}-\d{4}$/', $phone)) {
-        $errors[] = 'Phone must be in format 555-555-5555.';
-    }
     // ZIP code
     $zip = $data['zip'] ?? '';
     if (!preg_match('/^\d{5}(-\d{4})?$/', $zip)) {
         $errors[] = 'ZIP must be 5 digits or ZIP+4 (e.g. 74103 or 74103-1234).';
     }
+
+    // Website
+    if (!filter_var($data['website'] ?? '', FILTER_VALIDATE_URL)) {
+        $errors[] = 'Invalid website URL.';
+    }
+
+    // Age
+    $age = filter_var(
+        $data['age'] ?? '',
+        FILTER_VALIDATE_INT,
+        ['options' => ['min_range' => 1, 'max_range' => 120]]
+    );
+
+    if ($age === false) {
+        $errors[] = 'Age must be a whole number between 1 and 120.';
+    } else {
+        $data['age'] = $age;
+    }
+
+    // Email
+    if (!filter_var($data['email'] ?? '', FILTER_VALIDATE_EMAIL)) {
+        $errors[] = 'Invalid email address.';
+    }
+
+    // Phone
+    $phone = $data['phone'] ?? '';
+    if (!preg_match('/^\d{3}-\d{3}-\d{4}$/', $phone)) {
+        $errors[] = 'Phone must be in format 555-555-5555.';
+    }
+
     if ($errors) {
         throw new ValidationException(implode(' | ', $errors));
+    }
+
+    $code = $data['product_code'] ?? '';
+    if (!preg_match('/^[A-Z]{2}\d{4}$/', $code)) {
+        throw new FormatException(
+            'Product code must be two uppercase letters followed by four digits (e.g. AB1234).'
+        );
     }
     return $data;
 }
