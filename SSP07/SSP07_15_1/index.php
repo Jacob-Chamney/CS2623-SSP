@@ -49,38 +49,48 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 ?>
 <!DOCTYPE html>
 <html lang="en">
-    <head><meta charset="UTF-8"><title>Ex 15-1 Validation</title></head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>CS2623 SSP07 Ex 15-1: Chamney</title>
+        <link rel="stylesheet" href="../../CSS/main.css">
+        <link rel="stylesheet" href="../../CSS/table.css">
+    </head>
     <body>
-        <h1>Contact Form Validation</h1>
-        <?php if ($errMsg) : ?>
-        <div class="error">
-            <?= htmlspecialchars($errMsg, ENT_QUOTES, 'UTF-8') ?>
-        </div>
-        <?php endif; ?>
-        <?php if ($result) : ?>
-        <p>✓ All fields valid — ready to save.</p>
-        <ul>
-            <li>Email: <?= htmlspecialchars($result['email'], ENT_QUOTES, 'UTF-8') ?></li>
-            <li>Phone: <?= htmlspecialchars($result['phone'], ENT_QUOTES, 'UTF-8') ?></li>
-            <li>ZIP: <?= htmlspecialchars($result['zip'], ENT_QUOTES, 'UTF-8') ?></li>
-            <li>Website: <?= htmlspecialchars($result['website'], ENT_QUOTES, 'UTF-8') ?></li>
-            <li>Age: <?= (int) $result['age'] ?></li>
-            <li>Product Code: <?= htmlspecialchars($result['product_code'], ENT_QUOTES, 'UTF-8') ?></li>
-        </ul>
-        <p><strong>Message:</strong><br>
-            <?= nl2br(htmlspecialchars($result['message'], ENT_QUOTES, 'UTF-8')) ?>
-        </p>        
-        <?php endif; ?>
-        <form method="post">
-            <label>Email: <input type="text" name="email"></label><br>
-            <label>Phone (555-555-5555): <input type="text" name="phone"></label><br>
-            <label>ZIP: <input type="text" name="zip"></label><br>
-            <label>Website: <input type="text" name="website"></label><br>
-            <label>Age (1-120): <input type="number" name="age" min="1" max="120"></label><br>
-            <label>Product Code (AB1234): <input type="text" name="product_code"></label><br>
-            <label>Message:<br>
-                <textarea name="message" rows="4" cols="40"></textarea>
-            </label><br>
-            <button type="submit">Validate</button>
-        </form>
+        <?php require_once dirname(dirname(__DIR__)) . "/PHP/include_header.php"; ?>
+        <div id="page-wrapper">
+            <main class="center-text">
+                <?php require_once dirname(dirname(__DIR__)) . "/PHP/include_topNav.php"; ?>
+                <h1>Contact Form Validation</h1>
+                <?php if ($errMsg) : ?>
+                <div class="error">
+                    <?= htmlspecialchars($errMsg, ENT_QUOTES, 'UTF-8') ?>
+                </div>
+                <?php endif; ?>
+                <?php if ($result) : ?>
+                <p>✓ All fields valid — ready to save.</p>
+                <ul>
+                    <li>Email: <?= htmlspecialchars($result['email'], ENT_QUOTES, 'UTF-8') ?></li>
+                    <li>Phone: <?= htmlspecialchars($result['phone'], ENT_QUOTES, 'UTF-8') ?></li>
+                    <li>ZIP: <?= htmlspecialchars($result['zip'], ENT_QUOTES, 'UTF-8') ?></li>
+                    <li>Website: <?= htmlspecialchars($result['website'], ENT_QUOTES, 'UTF-8') ?></li>
+                    <li>Age: <?= (int) $result['age'] ?></li>
+                    <li>Product Code: <?= htmlspecialchars($result['product_code'], ENT_QUOTES, 'UTF-8') ?></li>
+                </ul>
+                <p><strong>Message:</strong><br>
+                    <?= nl2br(htmlspecialchars($result['message'], ENT_QUOTES, 'UTF-8')) ?>
+                </p>        
+                <?php endif; ?>
+                <form method="post">
+                    <label>Email: <input type="text" name="email"></label><br>
+                    <label>Phone (555-555-5555): <input type="text" name="phone"></label><br>
+                    <label>ZIP: <input type="text" name="zip"></label><br>
+                    <label>Website: <input type="text" name="website"></label><br>
+                    <label>Age (1-120): <input type="number" name="age" min="1" max="120"></label><br>
+                    <label>Product Code (AB1234): <input type="text" name="product_code"></label><br>
+                    <label>Message:<br>
+                        <textarea name="message" rows="4" cols="40"></textarea>
+                    </label><br>
+                    <button type="submit">Validate</button>
+                </form>
     </body></html>
