@@ -74,6 +74,7 @@ foreach ($_SESSION['cart'] as $pid => $qty) {
                     <h3><?= htmlspecialchars($p['name'], ENT_QUOTES, 'UTF-8') ?></h3>
                     <p>$<?= number_format((float) $p['price'], 2) ?></p>
                     <form method="post">
+                        <input type="hidden" name="action" value="add">
                         <input type="hidden" name="product_id" value="<?= (int) $p['id'] ?>">
                         <button type="submit">Add to Cart</button>
                     </form>
@@ -92,7 +93,14 @@ foreach ($_SESSION['cart'] as $pid => $qty) {
                             <?php if (isset($products[$pid])) : ?>
                         <tr>
                             <td><?= htmlspecialchars($products[$pid]['name'], ENT_QUOTES, 'UTF-8') ?></td>
-                            <td><?= (int) $qty ?></td>
+                            <td>
+                                <?= (int) $qty ?>
+                                <form method="post" style="display:inline">
+                                    <input type="hidden" name="action" value="remove">
+                                    <input type="hidden" name="product_id" value="<?= (int) $pid ?>">
+                                    <button type="submit">Remove one</button>
+                                </form>
+                            </td>
                             <td>$<?= number_format((float) $products[$pid]['price'] * $qty, 2) ?></td>
                         </tr>
                             <?php endif; ?>
@@ -103,6 +111,7 @@ foreach ($_SESSION['cart'] as $pid => $qty) {
                         </tr>
                     </tbody>
                 </table>
+                <p><a href="cart_clear.php">Clear Cart</a></p>
                 <?php endif; ?>
             </main>
         </div>

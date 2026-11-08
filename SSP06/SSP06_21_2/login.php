@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 session_start();
 
+$navBase = '../../';
+
 $_SESSION['attempts'] ??= 0;
 $_SESSION['locked'] ??= false;
 $rememberedUser = (string) ($_COOKIE['remember_user'] ?? '');
@@ -57,34 +59,43 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>CS2623 Login</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>CS2623 SSP06 Login: Chamney</title>
+        <link rel="stylesheet" href="../../CSS/main.css">
     </head>
     <body>
-        <h1>Login</h1>
+        <?php require_once dirname(dirname(__DIR__)) . "/PHP/include_header.php"; ?>
+        <div id="page-wrapper">
+            <main class="center-text">
+                <?php require_once dirname(dirname(__DIR__)) . "/PHP/include_topNav.php"; ?>
 
-        <?php if ($error !== '') : ?>
-        <p><?= htmlspecialchars($error, ENT_QUOTES, 'UTF-8') ?></p>
-        <?php endif; ?>
+                <h1>Login</h1>
 
-        <form method="post">
-            <label>Username:
-                <input type="text" name="username" autocomplete="username"
-                    value="<?= htmlspecialchars($username ?? $rememberedUser, ENT_QUOTES, 'UTF-8') ?>">
-            </label><br>
-            <label>Password:
-                <input type="password" name="password" autocomplete="current-password">
-            </label><br>
-            <label>
-                <input type="checkbox" name="remember" value="1"
-                    <?= $rememberedUser !== '' ? 'checked' : '' ?>>
-                Remember me
-            </label><br>
-            <button type="submit">Log in</button>
-        </form>
+                <?php if ($error !== '') : ?>
+                <div class="error"><?= htmlspecialchars($error, ENT_QUOTES, 'UTF-8') ?></div>
+                <?php endif; ?>
+
+                <form method="post">
+                    <label>Username:
+                        <input type="text" name="username" autocomplete="username"
+                            value="<?= htmlspecialchars($username ?? $rememberedUser, ENT_QUOTES, 'UTF-8') ?>">
+                    </label><br>
+                    <label>Password:
+                        <input type="password" name="password" autocomplete="current-password">
+                    </label><br>
+                    <label>
+                        <input type="checkbox" name="remember" value="1"
+                            <?= $rememberedUser !== '' ? 'checked' : '' ?>>
+                        Remember me
+                    </label><br>
+                    <button type="submit">Log in</button>
+                </form>
+            </main>
+        </div>
+        <?php require_once dirname(dirname(__DIR__)) . "/PHP/include_footer.php"; ?>
     </body>
 </html>

@@ -11,8 +11,8 @@ $navBase = $navBase ?? '../';
     <a href="<?= $navBase ?>SSP03/SSP03.php">SSP03</a>
     <a href="<?= $navBase ?>SSP04/ex1.php">SSP04</a>
     <a href="<?= $navBase ?>SSP05/SSP05.html">SSP05</a>
-    <a href="<?= $navBase ?>SSP06/SSP06.php">SSP06</a>
-    <a href="<?= $navBase ?>SSP07/SSP07.html">SSP07</a>
+    <a href="<?= $navBase ?>SSP06/index.html">SSP06</a>
+    <a href="<?= $navBase ?>SSP07/index.html">SSP07</a>
     <a href="<?= $navBase ?>SSP08/SSP08.php">SSP08</a>
     <a href="<?= $navBase ?>SSP09/SSP09.php">SSP09</a>
     <a href="<?= $navBase ?>SSP10/SSP10.php">SSP10</a>
