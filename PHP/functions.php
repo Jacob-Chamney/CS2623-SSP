@@ -2,19 +2,21 @@
 
 //declare(strict_types=1); not introduced until PHP 7.0, so we will not use it here.
 
+use CS2623\Week4\ValidationException;
+
 function fn_tableOpen($caption)
 {
     echo '<table border="1" cellpadding="6" cellspacing="0">';
     echo '<tr style="background-color:#1B2A6B;color:#FFFFFF;">';
-        echo ' <th colspan="3">';
-            echo htmlspecialchars($caption, ENT_QUOTES, 'UTF-8');
-            echo ' </th>';
-        echo '</tr>';
+    echo ' <th colspan="3">';
+    echo htmlspecialchars($caption, ENT_QUOTES, 'UTF-8');
+    echo ' </th>';
+    echo '</tr>';
     echo '<tr style="background-color:#006B7D;color:#FFFFFF;">';
-        echo '<th>Day</th>
-        <th>Details</th>
-        <th>Time</th>';
-        echo '
+    echo '<th>Day</th>
+    <th>Details</th>
+    <th>Time</th>';
+    echo '
     </tr>';
 }
 
@@ -37,7 +39,7 @@ function fn_tableRow($day, $details, $time)
 {
     echo '<td>' . htmlspecialchars($day, ENT_QUOTES, 'UTF-8') . '</td>';
     echo '<td>' . htmlspecialchars($details, ENT_QUOTES, 'UTF-8') .
-    '</td>';
+        '</td>';
     echo '<td>' . htmlspecialchars($time, ENT_QUOTES, 'UTF-8') . '</td>';
     echo '</tr>';
 }
@@ -115,4 +117,28 @@ function formatInterval($interval)
     $hours = $interval->h;
     $minutes = $interval->i;
     return "{$days} days, {$hours} hours, {$minutes} minutes";
+}
+
+// validation function for contact form
+function validateContact(array $data): array
+{
+    $errors = [];
+    // Email — use filter_var, NOT a custom regex
+    if (!filter_var($data['email'] ?? '', FILTER_VALIDATE_EMAIL)) {
+        $errors[] = 'Invalid email address.';
+    }
+    // Phone — filter_var has no phone validator; use preg_match
+    $phone = $data['phone'] ?? '';
+    if (!preg_match('/^\d{3}-\d{3}-\d{4}$/', $phone)) {
+        $errors[] = 'Phone must be in format 555-555-5555.';
+    }
+    // ZIP code
+    $zip = $data['zip'] ?? '';
+    if (!preg_match('/^\d{5}(-\d{4})?$/', $zip)) {
+        $errors[] = 'ZIP must be 5 digits or ZIP+4 (e.g. 74103 or 74103-1234).';
+    }
+    if ($errors) {
+        throw new ValidationException(implode(' | ', $errors));
+    }
+    return $data;
 }
