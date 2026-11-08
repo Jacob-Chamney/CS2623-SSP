@@ -63,7 +63,7 @@ $catalog = [
                     </li>
                 </ul>
             </nav>
-            <main class="center-text">
+            <main class="with-left-nav center-text">
                 <?php require_once dirname(dirname(__DIR__)) . "/PHP/include_topNav.php"; ?>
                 <h1>Fruit Array Demo</h1>
                 <form method="post">
