@@ -186,6 +186,9 @@ form label {
 form input[type="text"],
 form input[type="email"],
 form input[type="number"],
+form input[type="password"],
+form input[type="url"],
+form input[type="tel"],
 form select,
 form textarea {
   width: 100%;
@@ -232,4 +235,43 @@ form input[type="submit"] {
 
 form input[type="submit"]:hover {
   text-decoration: underline;
+}
+
+/* native buttons */
+
+form button {
+  display: inline-block;
+  margin-top: 1em;
+  margin-right: 0.5em;
+  background-color: #006B7D;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 10px;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+form button:hover {
+  text-decoration: underline;
+}
+
+/* forms that sit inline inside a table cell */
+
+.inline-form {
+  display: inline;
+}
+
+/* validation errors */
+
+.error {
+  max-width: 34em;
+  margin: 1em auto;
+  padding: 0.75em 1em;
+  border: 1px solid #CC0000;
+  border-left: 6px solid #CC0000;
+  background-color: #FDECEC;
+  color: #8A0000;
+  text-align: left;
 }

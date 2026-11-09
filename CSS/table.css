@@ -81,3 +81,10 @@
 #weekly-planner tr:nth-child(even) td {
   background-color: #E8EEF4;
 }
+
+/* center table cell text when inside .center-text */
+
+.center-text .data-table th,
+.center-text .data-table td {
+  text-align: center;
+}

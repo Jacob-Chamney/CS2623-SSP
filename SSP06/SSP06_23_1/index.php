@@ -95,7 +95,7 @@ foreach ($_SESSION['cart'] as $pid => $qty) {
                             <td><?= htmlspecialchars($products[$pid]['name'], ENT_QUOTES, 'UTF-8') ?></td>
                             <td>
                                 <?= (int) $qty ?>
-                                <form method="post" style="display:inline">
+                                <form method="post" class="inline-form">
                                     <input type="hidden" name="action" value="remove">
                                     <input type="hidden" name="product_id" value="<?= (int) $pid ?>">
                                     <button type="submit">Remove one</button>
