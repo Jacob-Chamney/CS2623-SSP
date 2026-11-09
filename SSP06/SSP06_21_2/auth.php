@@ -1,11 +1,13 @@
 <?php
 
-declare(strict_types=1);
+//declare(strict_types=1);
 
 session_start();
 
+date_default_timezone_set('America/Chicago');
+
 if (!isset($_SESSION['user'])) {
-    $loginPath = $loginPath ?? 'login.php';
+    $loginPath = isset($loginPath) ? $loginPath : 'login.php';
     header('Location: ' . $loginPath);
     exit;
 }

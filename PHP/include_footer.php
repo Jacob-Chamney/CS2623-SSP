@@ -2,6 +2,9 @@
 
 /* include_footer.php — CS2623 SSP02 */
 
+// Apollo/PHP 5.x does not set a default timezone
+date_default_timezone_set('America/Chicago');
+
 // Get the last-modified timestamp of the currently running script
 $last_modified = date(
     "F j, Y, g:i a",

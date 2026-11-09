@@ -2,7 +2,7 @@
 
 /* include_topNav.php — CS2623 SSP02 */
 
-$navBase = $navBase ?? '../';
+$navBase = isset($navBase) ? $navBase : '../';
 
 ?>
 <nav id="top-nav">

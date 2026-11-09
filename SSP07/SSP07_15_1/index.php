@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+//declare(strict_types=1);
 
 use CS2623\Week4\FormatException;
 use CS2623\Week4\ValidationException;
@@ -16,22 +16,21 @@ $result = null;
 $errMsg = null;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $raw = [
-        'email' => filter_input(INPUT_POST, 'email', FILTER_SANITIZE_SPECIAL_CHARS)
-            ?? '',
-        'phone' => filter_input(INPUT_POST, 'phone', FILTER_SANITIZE_SPECIAL_CHARS)
-            ?? '',
-        'zip' => filter_input(INPUT_POST, 'zip', FILTER_SANITIZE_SPECIAL_CHARS)
-            ?? '',
-        'website' => filter_input(INPUT_POST, 'website', FILTER_SANITIZE_URL)
-            ?? '',
-        'age' => filter_input(INPUT_POST, 'age', FILTER_SANITIZE_SPECIAL_CHARS)
-            ?? '',
-        'product_code' => filter_input(INPUT_POST, 'product_code', FILTER_SANITIZE_SPECIAL_CHARS)
-            ?? '',
-        'message' => filter_input(INPUT_POST, 'message', FILTER_UNSAFE_RAW)
-            ?? '',
+    $fields = [
+        'email' => FILTER_SANITIZE_SPECIAL_CHARS,
+        'phone' => FILTER_SANITIZE_SPECIAL_CHARS,
+        'zip' => FILTER_SANITIZE_SPECIAL_CHARS,
+        'website' => FILTER_SANITIZE_URL,
+        'age' => FILTER_SANITIZE_SPECIAL_CHARS,
+        'product_code' => FILTER_SANITIZE_SPECIAL_CHARS,
+        'message' => FILTER_UNSAFE_RAW,
     ];
+
+    $raw = [];
+    foreach ($fields as $field => $filter) {
+        $value = filter_input(INPUT_POST, $field, $filter);
+        $raw[$field] = $value === null ? '' : $value;
+    }
     try {
         $result = validateContact($raw);
     } catch (FormatException $e) {

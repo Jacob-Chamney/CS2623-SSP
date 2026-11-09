@@ -2,6 +2,8 @@
 
 //declare(strict_types=1); not introduced until PHP 7.0, so we will not use it here.
 
+date_default_timezone_set('America/Chicago');
+
 use CS2623\Week4\FormatException;
 use CS2623\Week4\ValidationException;
 
@@ -121,23 +123,23 @@ function formatInterval($interval)
 }
 
 // validation function for contact form
-function validateContact(array $data): array
+function validateContact(array $data)
 {
     $errors = [];
     // ZIP code
-    $zip = $data['zip'] ?? '';
+    $zip = isset($data['zip']) ? $data['zip'] : '';
     if (!preg_match('/^\d{5}(-\d{4})?$/', $zip)) {
         $errors[] = 'ZIP must be 5 digits or ZIP+4 (e.g. 74103 or 74103-1234).';
     }
 
     // Website
-    if (!filter_var($data['website'] ?? '', FILTER_VALIDATE_URL)) {
+    if (!filter_var(isset($data['website']) ? $data['website'] : '', FILTER_VALIDATE_URL)) {
         $errors[] = 'Invalid website URL.';
     }
 
     // Age
     $age = filter_var(
-        $data['age'] ?? '',
+        isset($data['age']) ? $data['age'] : '',
         FILTER_VALIDATE_INT,
         ['options' => ['min_range' => 1, 'max_range' => 120]]
     );
@@ -149,12 +151,12 @@ function validateContact(array $data): array
     }
 
     // Email
-    if (!filter_var($data['email'] ?? '', FILTER_VALIDATE_EMAIL)) {
+    if (!filter_var(isset($data['email']) ? $data['email'] : '', FILTER_VALIDATE_EMAIL)) {
         $errors[] = 'Invalid email address.';
     }
 
     // Phone
-    $phone = $data['phone'] ?? '';
+    $phone = isset($data['phone']) ? $data['phone'] : '';
     if (!preg_match('/^\d{3}-\d{3}-\d{4}$/', $phone)) {
         $errors[] = 'Phone must be in format 555-555-5555.';
     }
@@ -163,7 +165,7 @@ function validateContact(array $data): array
         throw new ValidationException(implode(' | ', $errors));
     }
 
-    $code = $data['product_code'] ?? '';
+    $code = isset($data['product_code']) ? $data['product_code'] : '';
     if (!preg_match('/^[A-Z]{2}\d{4}$/', $code)) {
         throw new FormatException(
             'Product code must be two uppercase letters followed by four digits (e.g. AB1234).'

@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+//declare(strict_types=1);
 
 $navBase = '../../';
 $loginPath = '../SSP06_21_2/login.php';
@@ -13,15 +13,22 @@ $products = [
     4 => ['id' => 4, 'name' => 'Ibanez RG550', 'price' => 299.99],
 ];
 
-$_SESSION['cart'] ??= [];
+if (!isset($_SESSION['cart'])) {
+    $_SESSION['cart'] = [];
+}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $id = filter_input(INPUT_POST, 'product_id', FILTER_VALIDATE_INT);
-    $action = (string) (filter_input(INPUT_POST, 'action', FILTER_SANITIZE_SPECIAL_CHARS) ?? 'add');
+
+    $action = filter_input(INPUT_POST, 'action', FILTER_SANITIZE_SPECIAL_CHARS);
+    if ($action === null) {
+        $action = 'add';
+    }
+    $action = (string) $action;
 
     if ($id !== null && $id !== false && isset($products[$id])) {
         if ($action === 'remove') {
-            $qty = $_SESSION['cart'][$id] ?? 0;
+            $qty = isset($_SESSION['cart'][$id]) ? $_SESSION['cart'][$id] : 0;
 
             if ($qty <= 1) {
                 unset($_SESSION['cart'][$id]);
@@ -29,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $_SESSION['cart'][$id] = $qty - 1;
             }
         } else {
-            $_SESSION['cart'][$id] = ($_SESSION['cart'][$id] ?? 0) + 1;
+            $_SESSION['cart'][$id] = (isset($_SESSION['cart'][$id]) ? $_SESSION['cart'][$id] : 0) + 1;
         }
     }
 

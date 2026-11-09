@@ -1,14 +1,22 @@
 <?php
 
-declare(strict_types=1);
+//declare(strict_types=1);
 
 session_start();
 
+date_default_timezone_set('America/Chicago');
+
 $navBase = '../../';
 
-$_SESSION['attempts'] ??= 0;
-$_SESSION['locked'] ??= false;
-$rememberedUser = (string) ($_COOKIE['remember_user'] ?? '');
+if (!isset($_SESSION['attempts'])) {
+    $_SESSION['attempts'] = 0;
+}
+
+if (!isset($_SESSION['locked'])) {
+    $_SESSION['locked'] = false;
+}
+
+$rememberedUser = isset($_COOKIE['remember_user']) ? (string) $_COOKIE['remember_user'] : '';
 
 $users = [
     'admin' => password_hash('secret123', PASSWORD_DEFAULT),
@@ -18,8 +26,17 @@ $users = [
 $error = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $username = (string) (filter_input(INPUT_POST, 'username', FILTER_SANITIZE_SPECIAL_CHARS) ?? '');
-    $password = (string) (filter_input(INPUT_POST, 'password', FILTER_UNSAFE_RAW) ?? '');
+    $username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_SPECIAL_CHARS);
+    if ($username === null) {
+        $username = '';
+    }
+    $username = (string) $username;
+
+    $password = filter_input(INPUT_POST, 'password', FILTER_UNSAFE_RAW);
+    if ($password === null) {
+        $password = '';
+    }
+    $password = (string) $password;
 
     if ($_SESSION['locked']) {
         $error = 'Too many failed attempts. Account locked for this session.';
@@ -29,21 +46,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['login_at'] = time();
         $_SESSION['attempts'] = 0;
         $_SESSION['locked'] = false;
+
         if (isset($_POST['remember'])) {
-            setcookie('remember_user', $username, [
-                'expires' => time() + 60 * 60 * 24 * 30,
-                'path' => '/',
-                'httponly' => true,
-                'samesite' => 'Lax',
-            ]);
+            setcookie('remember_user', $username, time() + 60 * 60 * 24 * 30, '/', '', false, true);
         } else {
-            setcookie('remember_user', '', [
-                'expires' => time() - 3600,
-                'path' => '/',
-                'httponly' => true,
-                'samesite' => 'Lax',
-            ]);
+            setcookie('remember_user', '', time() - 3600, '/', '', false, true);
         }
+
         header('Location: dashboard.php');
         exit;
     } else {
@@ -82,7 +91,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <form method="post">
                     <label>Username:
                         <input type="text" name="username" autocomplete="username"
-                            value="<?= htmlspecialchars($username ?? $rememberedUser, ENT_QUOTES, 'UTF-8') ?>">
+                            value="<?= htmlspecialchars(isset($username) ? $username : $rememberedUser, ENT_QUOTES, 'UTF-8') ?>">
                     </label><br>
                     <label>Password:
                         <input type="password" name="password" autocomplete="current-password">

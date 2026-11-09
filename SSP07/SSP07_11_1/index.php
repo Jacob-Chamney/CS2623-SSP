@@ -1,14 +1,23 @@
 <?php
 
-declare(strict_types=1);
+//declare(strict_types=1);
 
 require_once dirname(dirname(__DIR__)) . "/PHP/functions.php";
 
 $navBase = '../../';
 
 $fruits = ['apple', 'banana', 'cherry', 'dragonfruit'];
-$search = (string) (filter_input(INPUT_POST, 'search', FILTER_SANITIZE_SPECIAL_CHARS) ?? '');
-$action = (string) (filter_input(INPUT_POST, 'action', FILTER_SANITIZE_SPECIAL_CHARS) ?? '');
+$search = filter_input(INPUT_POST, 'search', FILTER_SANITIZE_SPECIAL_CHARS);
+if ($search === null) {
+    $search = '';
+}
+$search = (string) $search;
+
+$action = filter_input(INPUT_POST, 'action', FILTER_SANITIZE_SPECIAL_CHARS);
+if ($action === null) {
+    $action = '';
+}
+$action = (string) $action;
 
 $message = '';
 $showSorted = false;
@@ -31,9 +40,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 // array_map with arrow function (PHP 7.4+)
-$upper = array_map(fn($f) => strtoupper($f), $fruits);
+$upper = array_map(function ($f) {
+    return strtoupper($f);
+}, $fruits);
 
-$longFruits = array_filter($fruits, fn($f) => strlen($f) >= 6);
+$longFruits = array_filter($fruits, function ($f) {
+    return strlen($f) >= 6;
+});
 
 // arrays of arrays — simulates a DB result set
 $catalog = [
